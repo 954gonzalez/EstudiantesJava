@@ -1,0 +1,209 @@
+import javax.swing.JOptionPane;
+
+public class Procesos {
+
+	String nombres[];
+	double edades[];
+	int valida=0;
+	double promedio=0;
+	int conte=0;
+	double mayores=0;
+	
+	public void iniciar() {
+		String menu="MENU ESTUDIANTES\n";
+		menu=menu+"1. Registrar\n";
+		menu+="2. Imprimir lista de estudiantes con su edad\n";
+		menu+="3. promedio de edades de estudiantes\n";
+		menu+="4. Estudiantes con mayor edad\n";
+		menu+="5. estudiantes con menor edad\n";
+		menu+="6. mayores de edad\n";
+		menu+="7. Buscar por nombre\n";
+		menu+="8. Buscar por edad\n";
+		menu+="9. Salir\n";
+		menu+="Ingrese una opción:";
+		
+		int opc=0;
+		do {
+			opc=Integer.parseInt(JOptionPane.showInputDialog(menu));
+			validarOpcion(opc);
+		} while (opc!=9);
+	}
+	
+	private void validarOpcion(int opc) {
+			switch (opc) {
+			case 1: 
+				valida=1;
+				registrarEstudiantes();
+				break;
+			case 2:
+					if (nombres!=null) {
+						imprimirEstudiantes();
+					}else {
+						System.out.println("No hay datos");
+					}
+
+				break; 
+			case 3:PromedioEstudiantes();
+				break;
+				
+			case 4:mayoredad();
+			break;
+			case 5:menoredad();
+			
+			break;
+			
+			case 6:mayoresDeEdad();
+			break;
+			case 7:buscarEstudiantePorNombre();
+			break;
+			
+			case 8:buscarEstudiantePorEdad();
+			break;
+			case 9: System.out.println("Chao!");
+				break;
+			default: System.out.println("No existe el código!");
+				break;
+			}
+	}
+	
+	
+	
+
+
+	private void buscarEstudiantePorEdad() {
+		int cont=0;
+		double edadBuscar=Double.parseDouble(JOptionPane.showInputDialog("ingrese la edad "));
+		
+		for (int i = 0; i < edades.length; i++) {
+			if (edades[i]==edadBuscar) {
+				System.out.println("Lo encontró en la pos: "+i + " nombre: "+nombres[i]);
+				cont++;
+			}
+		}
+		
+		if (cont>0) {
+			System.out.println("Lo encontró "+cont+" veces");
+		}else {
+			System.out.println("No encontró la edad "+edadBuscar);
+		}
+		
+	}
+		
+	
+
+	private void mayoredad() {
+		double mayorEdad=edades[0];
+		for(int i=0;i<edades.length;i++) {
+			if(edades[i]>mayorEdad ) {
+				mayorEdad=edades[i];
+			}
+		
+		}
+		
+		   System.out.println("El estudiante/s con la edad más alta es: ");
+	        for (int i = 0; i < edades.length; i++) {
+	            if (edades[i] == mayorEdad) {
+	                System.out.println("Estudiante " + (i+1)+" con la edad de "+ mayorEdad+ " años");
+	            }
+	        }
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	private void menoredad() {
+		double menorEdad=edades[0];
+		
+		for(int i=0;i<edades.length;i++) {
+			if(edades[i]< menorEdad) {
+				menorEdad=edades[i];
+			}}
+			   System.out.println("El estudiante con la edad menor es: ");
+			for(int j=0;j<edades.length;j++) {
+				if(edades[j] == menorEdad) {
+					System.out.println("Estudiante : " + (j+1)+" con la edad de: "+ menorEdad);
+				}
+			}
+		
+	}
+
+	private void mayoresDeEdad() {
+		
+	
+		for(int i=0;i<edades.length;i++) {
+			if(edades[i]>=18) {
+				
+			}System.out.println("los estudiantes mayores o igual a 18 son "+ nombres[i]);
+		}
+		
+	}
+
+	private void PromedioEstudiantes() {
+		for(int i=0; i<edades.length;i++) {
+			promedio+=edades[i]/edades.length;
+			
+		}
+		System.out.println("el promedio de edades de los estudiantes es : "+ promedio);
+	}
+
+	private void registrarEstudiantes() {
+		int n=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de estudiantes"));
+		nombres= new String[n];
+        edades=new double[n];
+		for (int i = 0; i < nombres.length; i++) {
+			nombres[i]=JOptionPane.showInputDialog("Ingrese el nombre "+(i+1));
+			do {
+			  edades[i]=Double.parseDouble(JOptionPane.showInputDialog("ingrese la edad "+(i+1)));
+			}while(edades[i]<0 || edades[i] >100);
+			
+		}
+	   
+		
+		
+		
+		
+		System.out.println("Ingresa a registrar");
+	}
+
+	public void imprimirEstudiantes() {
+		System.out.println(nombres);
+		for (int i = 0; i < nombres.length; i++) {
+			System.out.println("nombre : "+ nombres[i] + " edad: "+ edades[i]);
+		}
+		
+			
+			
+			
+		System.out.println("Imprimir");
+	}
+	
+	public void buscarEstudiantePorNombre() {
+		System.out.println("Buscar Nombre");
+		int cont=0;
+		String nombreBuscar=JOptionPane.showInputDialog("Ingrese el nombre a buscar");
+		
+		for (int i = 0; i < nombres.length; i++) {
+			if (nombres[i].equals(nombreBuscar)) {
+				System.out.println("Lo encontró en la pos: "+i);
+				cont++;
+			}
+		}
+		
+		if (cont>0) {
+			System.out.println("Lo encontró "+cont+" veces");
+		}else {
+			System.out.println("No encontró el nombre "+nombreBuscar);
+		}
+		
+	}
+	
+	
+	
+	
+	
+}
